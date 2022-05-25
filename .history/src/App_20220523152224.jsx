@@ -1,0 +1,44 @@
+import { useState } from 'react'
+import Webcam from "react-webcam";
+import logo from './logo.svg'
+import './App.css'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: "user"
+  };
+  
+  const WebcamCapture = () => (
+    <Webcam
+      audio={false}
+      height={720}
+      screenshotFormat="image/jpeg"
+      width={1280}
+      videoConstraints={videoConstraints}
+    >
+      {({ getScreenshot }) => (
+        <button
+          onClick={() => {
+            const imageSrc = getScreenshot()
+          }}
+        >
+          Capture photo
+        </button>
+      )}
+    </Webcam>
+  );
+  
+  return (
+    <div className="App">
+      <header className="App-header">
+      {WebcamCapture()}  
+      </header>
+    </div>
+  )
+}
+
+export default App
